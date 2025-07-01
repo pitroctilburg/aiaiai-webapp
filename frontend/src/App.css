@@ -43,18 +43,26 @@
 nav ul {
   list-style-type: none;
   padding: 0;
+  display: flex;
+  border-bottom: 1px solid #ccc;
 }
 
 nav ul li {
-  display: inline;
   margin-right: 10px;
 }
 
 nav ul li a {
   text-decoration: none;
-  color: blue;
+  padding: 10px 15px;
+  display: inline-block;
+  color: #333;
+  border: 1px solid transparent;
+  border-radius: 5px 5px 0 0;
 }
 
-nav ul li a:hover {
-  text-decoration: underline;
+nav ul li a:hover,
+nav ul li a.active {
+  background-color: #f0f0f0;
+  border-color: #ccc;
+  border-bottom-color: transparent;
 }
