@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Intake from './components/Intake';
 import Station1 from './components/Station1';
 import Output from './components/Output';
@@ -15,11 +15,11 @@ function App() {
             <li><Link to="/output">Output</Link></li>
           </ul>
         </nav>
-        <Switch>
-          <Route path="/intake" component={Intake} />
-          <Route path="/station1" component={Station1} />
-          <Route path="/output" component={Output} />
-        </Switch>
+        <Routes>
+          <Route path="/intake" element={<Intake />} />
+          <Route path="/station1" element={<Station1 />} />
+          <Route path="/output" element={<Output />} />
+        </Routes>
       </div>
     </Router>
   );
