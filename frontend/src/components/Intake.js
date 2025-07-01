@@ -1,10 +1,8 @@
 import React, { useState, useRef } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 function Intake() {
   const [name, setName] = useState("");
-  const [birthdate, setBirthdate] = useState(new Date());
+  const [birthdate, setBirthdate] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,10 +29,10 @@ function Intake() {
         <div>
           <label>
             Birthdate:
-            <DatePicker
-              selected={birthdate}
-              onChange={(date) => setBirthdate(date)}
-              dateFormat="yyyy/MM/dd"
+            <input
+              type="date"
+              value={birthdate}
+              onChange={(e) => setBirthdate(e.target.value)}
               required
             />
           </label>
