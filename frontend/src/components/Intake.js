@@ -135,9 +135,9 @@ function Intake() {
         <Button
           variant="primary"
           type="submit"
-          className="w-100 mt-3"
-          style={{ display: 'block', margin: '0 auto' }}
           className="w-100 mt-3 mb-4"
+          style={{ display: 'block', margin: '0 auto' }}
+        >
           Submit
         </Button>
       </Form>
