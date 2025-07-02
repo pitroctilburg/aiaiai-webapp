@@ -47,6 +47,9 @@ function Intake() {
 
       if (response.ok) {
         console.log("Deelnemer succesvol toegevoegd");
+        setName("");
+        setBirthdate("");
+        setImage(null);
       } else {
         const errorData = await response.json();
         console.error("Fout bij het toevoegen van deelnemer:", errorData.error);
