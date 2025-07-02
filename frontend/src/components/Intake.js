@@ -47,7 +47,24 @@ function Intake() {
     }
   };
 
-  return (
+  const handleDelete = async (id, name) => {
+    if (window.confirm(`Weet je zeker dat je ${name} wil verwijderen?`)) {
+      try {
+        const response = await fetch(`http://localhost:3001/deelnemers/${id}`, {
+          method: 'DELETE',
+        });
+
+        if (response.ok) {
+          console.log("Deelnemer succesvol verwijderd");
+          fetchParticipants(); // Refresh the list after deletion
+        } else {
+          console.error("Fout bij het verwijderen van deelnemer");
+        }
+      } catch (error) {
+        console.error("Er is een fout opgetreden:", error);
+      }
+    }
+  };
     <div>
       <h1>Intake</h1>
       <form onSubmit={handleSubmit}>
@@ -83,6 +100,7 @@ function Intake() {
             <th>Naam</th>
             <th>Geboortedatum</th>
             <th>Registratietijd</th>
+            <th>Acties</th>
           </tr>
         </thead>
         <tbody>
@@ -90,8 +108,11 @@ function Intake() {
             <tr key={participant.id}>
               <td>{participant.id}</td>
               <td>{participant.naam}</td>
-              <td>{participant.geboortedatum}</td>
-              <td>{participant.registratietijd}</td>
+              <td>{new Date(participant.geboortedatum).toLocaleDateString('nl-NL')}</td>
+              <td>{new Date(participant.registratietijd).toLocaleTimeString('nl-NL')}</td>
+              <td>
+                <button onClick={() => handleDelete(participant.id, participant.naam)}>Verwijder</button>
+              </td>
             </tr>
           ))}
         </tbody>

@@ -26,7 +26,19 @@ app.post('/deelnemers', async (req, res) => {
   }
 });
 
-app.get('/deelnemers', async (req, res) => {
+app.delete('/deelnemers/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query("DELETE FROM deelnemers WHERE id = ?", [id]);
+    if (result.affectedRows > 0) {
+      res.status(200).json({ message: "Deelnemer succesvol verwijderd" });
+    } else {
+      res.status(404).json({ error: "Deelnemer niet gevonden" });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
   try {
     const deelnemers = await pool.query("SELECT * FROM deelnemers");
     res.json(deelnemers);
