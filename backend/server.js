@@ -1,5 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const multer = require('multer');
+const path = require('path');
 const cors = require('cors');
 require('dotenv').config();
 const pool = require('./db');
@@ -11,11 +12,24 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-app.use(bodyParser.json());
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    const userId = req.body.id || 'unknown';
+    cb(null, `profile-${userId}.jpg`);
+  }
+});
+
+const upload = multer({ storage });
+
+app.use(express.json());
 
 // Routes voor deelnemers
-app.post('/deelnemers', async (req, res) => {
+app.post('/deelnemers', upload.single('photo'), async (req, res) => {
   const { naam, geboortedatum } = req.body;
+  const photoPath = req.file ? req.file.path : null;
   try {
     const result = await pool.query(
       "INSERT INTO deelnemers (naam, geboortedatum, registratietijd) VALUES (?, ?, NOW())",

@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import Webcam from "react-webcam";
 
 function Intake() {
   const [name, setName] = useState("");
   const [birthdate, setBirthdate] = useState('');
 
   const [participants, setParticipants] = useState([]);
+  const webcamRef = useRef(null);
+  const [image, setImage] = useState(null);
 
   const fetchParticipants = async () => {
     try {
@@ -27,12 +30,17 @@ function Intake() {
     e.preventDefault();
     try {
       const formattedDate = new Date(birthdate).toISOString().split('T')[0];
+      const formData = new FormData();
+      formData.append('naam', name);
+      formData.append('geboortedatum', formattedDate);
+      if (image) {
+        const blob = await fetch(image).then(res => res.blob());
+        formData.append('photo', blob, `profile-${Date.now()}.jpg`);
+      }
+
       const response = await fetch('http://localhost:3001/deelnemers', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ naam: name, geboortedatum: formattedDate }),
+        body: formData,
       });
 
       if (response.ok) {
@@ -91,7 +99,20 @@ function Intake() {
             />
           </label>
         </div>
+        <div>
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            width={320}
+            height={240}
+          />
+          <button type="button" onClick={() => setImage(webcamRef.current.getScreenshot())}>
+            Capture Photo
+          </button>
+        </div>
         <button type="submit">Submit</button>
+        {image && <img src={image} alt="Captured" />}
       </form>
       <h2>Recent Toegevoegde Deelnemers</h2>
       <table>
