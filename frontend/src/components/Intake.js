@@ -105,7 +105,7 @@ function Intake() {
             />
           </Col>
         </Form.Group>
-        <Form.Group as={Row}>
+        <Form.Group as={Row} className="mt-3">
           <Col sm="12" className="d-flex justify-content-center position-relative">
             {image ? (
               <img src={image} alt="Captured" style={{ width: '640px', height: '480px', objectFit: 'cover' }} />
