@@ -7,15 +7,14 @@ const pool = require('./db');
 
 const app = express();
 
-app.use(express.json());
-
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
 app.use(cors({
   origin: 'http://localhost:3000',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
