@@ -102,19 +102,22 @@ function Intake() {
           </label>
         </div>
         <div>
-          <Webcam
-            audio={false}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            width={320}
-            height={240}
-          />
+          {image ? (
+            <img src={image} alt="Captured" style={{ width: '320px', height: '240px', objectFit: 'cover' }} />
+          ) : (
+            <Webcam
+              audio={false}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              width={320}
+              height={240}
+            />
+          )}
           <button type="button" onClick={() => setImage(webcamRef.current.getScreenshot())}>
             Capture Photo
           </button>
         </div>
         <button type="submit">Submit</button>
-        {image && <img src={image} alt="Captured" />}
       </form>
       <h2>Recent Toegevoegde Deelnemers</h2>
       <table>
