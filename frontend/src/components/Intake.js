@@ -4,11 +4,26 @@ function Intake() {
   const [name, setName] = useState("");
   const [birthdate, setBirthdate] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Name:", name);
-    console.log("Birthdate:", birthdate);
+    try {
+      const formattedDate = new Date(birthdate).toISOString().split('T')[0];
+      const response = await fetch('http://localhost:5000/deelnemers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ naam: name, geboortedatum: formattedDate }),
+      });
+
+      if (response.ok) {
+        console.log("Deelnemer succesvol toegevoegd");
+      } else {
+        console.error("Fout bij het toevoegen van deelnemer");
+      }
+    } catch (error) {
+      console.error("Er is een fout opgetreden:", error);
+    }
   };
 
   return (
