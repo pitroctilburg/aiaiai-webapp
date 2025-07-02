@@ -17,8 +17,8 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/');
   },
   filename: (req, file, cb) => {
-    const userId = req.body.id || 'unknown';
-    cb(null, `profile-${userId}.jpg`);
+    const profielfoto = req.body.profielfoto || `${Date.now()}.jpg`;
+    cb(null, profielfoto);
   }
 });
 
