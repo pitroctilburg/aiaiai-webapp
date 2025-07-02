@@ -30,10 +30,9 @@ function Intake() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const formattedDate = new Date(birthdate).toISOString().split('T')[0];
       const formData = new FormData();
       formData.append('naam', name);
-      formData.append('geboortedatum', formattedDate);
+      formData.append('geboortedatum', new Date(birthdate).toISOString().split('T')[0]);
       if (image) {
         const blob = await fetch(image).then(res => res.blob());
         const photoFilename = `${uuidv4()}.jpg`;
