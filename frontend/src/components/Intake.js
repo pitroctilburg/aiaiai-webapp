@@ -141,6 +141,7 @@ function Intake() {
                   />
                 )}
               </td>
+              <td>{participant.naam}</td>
               <td>{new Date(participant.geboortedatum).toLocaleDateString('nl-NL')}</td>
               <td>{new Date(participant.registratietijd).toLocaleTimeString('nl-NL')}</td>
               <td>
