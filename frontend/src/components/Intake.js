@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Webcam from "react-webcam";
+import { v4 as uuidv4 } from 'uuid';
 
 function Intake() {
   const [name, setName] = useState("");
@@ -35,7 +36,9 @@ function Intake() {
       formData.append('geboortedatum', formattedDate);
       if (image) {
         const blob = await fetch(image).then(res => res.blob());
-        formData.append('photo', blob, `profile-${Date.now()}.jpg`);
+        const photoFilename = `profile-${uuidv4()}.jpg`;
+        formData.append('photo', blob, photoFilename);
+        formData.append('profielfoto', photoFilename);
       }
 
       const response = await fetch('http://localhost:3001/deelnemers', {

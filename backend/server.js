@@ -31,9 +31,10 @@ app.post('/deelnemers', upload.single('photo'), async (req, res) => {
   const { naam, geboortedatum } = req.body;
   const photoPath = req.file ? req.file.path : null;
   try {
+    const profielfoto = req.body.profielfoto || null;
     const result = await pool.query(
-      "INSERT INTO deelnemers (naam, geboortedatum, registratietijd) VALUES (?, ?, NOW())",
-      [naam, geboortedatum]
+      "INSERT INTO deelnemers (naam, geboortedatum, registratietijd, profielfoto) VALUES (?, ?, NOW(), ?)",
+      [naam, geboortedatum, profielfoto]
     );
     res.status(201).json({ id: Number(result.insertId) });
   } catch (err) {
