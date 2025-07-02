@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Webcam from "react-webcam";
 import { v4 as uuidv4 } from 'uuid';
-import { Form, Button, Table, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button, Table, Container, Row, Col, Accordion } from 'react-bootstrap';
 
 function Intake() {
   const [name, setName] = useState("");
@@ -141,41 +141,47 @@ function Intake() {
           Submit
         </Button>
       </Form>
-      <h2>Recent Toegevoegde Deelnemers</h2>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Foto</th>
-            <th>Naam</th>
-            <th>Geboortedatum</th>
-            <th>Registratietijd</th>
-            <th>Acties</th>
-          </tr>
-        </thead>
-        <tbody>
-          {participants.map((participant) => (
-            <tr key={participant.id}>
-              <td>{participant.id}</td>
-              <td>
-                {participant.profielfoto && (
-                  <img
-                    src={`http://localhost:3001/uploads/${participant.profielfoto}`}
-                    alt="Profielfoto"
-                    style={{ width: '100px', height: '100px', objectFit: 'cover' }}
-                  />
-                )}
-              </td>
-              <td>{participant.naam}</td>
-              <td>{new Date(participant.geboortedatum).toLocaleDateString('nl-NL')}</td>
-              <td>{new Date(participant.registratietijd).toLocaleTimeString('nl-NL')}</td>
-              <td>
-                <button onClick={() => handleDelete(participant.id, participant.naam)}>Verwijder</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      <Accordion className="mt-4">
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>Recent Toegevoegde Deelnemers</Accordion.Header>
+          <Accordion.Body>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Foto</th>
+                  <th>Naam</th>
+                  <th>Geboortedatum</th>
+                  <th>Registratietijd</th>
+                  <th>Acties</th>
+                </tr>
+              </thead>
+              <tbody>
+                {participants.map((participant) => (
+                  <tr key={participant.id}>
+                    <td>{participant.id}</td>
+                    <td>
+                      {participant.profielfoto && (
+                        <img
+                          src={`http://localhost:3001/uploads/${participant.profielfoto}`}
+                          alt="Profielfoto"
+                          style={{ width: '100px', height: '100px', objectFit: 'cover' }}
+                        />
+                      )}
+                    </td>
+                    <td>{participant.naam}</td>
+                    <td>{new Date(participant.geboortedatum).toLocaleDateString('nl-NL')}</td>
+                    <td>{new Date(participant.registratietijd).toLocaleTimeString('nl-NL')}</td>
+                    <td>
+                      <button onClick={() => handleDelete(participant.id, participant.naam)}>Verwijder</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
     </Container>
   );
 }
