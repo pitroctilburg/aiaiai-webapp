@@ -122,6 +122,7 @@ function Intake() {
         <thead>
           <tr>
             <th>ID</th>
+            <th>Foto</th>
             <th>Naam</th>
             <th>Geboortedatum</th>
             <th>Registratietijd</th>
@@ -132,7 +133,15 @@ function Intake() {
           {participants.map((participant) => (
             <tr key={participant.id}>
               <td>{participant.id}</td>
-              <td>{participant.naam}</td>
+              <td>
+                {participant.profielfoto && (
+                  <img
+                    src={`http://localhost:3001/uploads/${participant.profielfoto}`}
+                    alt="Profielfoto"
+                    style={{ width: '100px', height: '100px', objectFit: 'cover' }}
+                  />
+                )}
+              </td>
               <td>{new Date(participant.geboortedatum).toLocaleDateString('nl-NL')}</td>
               <td>{new Date(participant.registratietijd).toLocaleTimeString('nl-NL')}</td>
               <td>
