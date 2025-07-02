@@ -106,19 +106,28 @@ function Intake() {
           </Col>
         </Form.Group>
         <Form.Group as={Row}>
-          <Col sm="12">
+          <Col sm="12" className="d-flex justify-content-center position-relative">
             {image ? (
-              <img src={image} alt="Captured" style={{ width: '320px', height: '240px', objectFit: 'cover' }} />
+              <img src={image} alt="Captured" style={{ width: '640px', height: '480px', objectFit: 'cover' }} />
             ) : (
               <Webcam
                 audio={false}
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
-                width={320}
-                height={240}
+                width={640}
+                height={480}
               />
             )}
-            <Button variant="secondary" onClick={() => setImage(webcamRef.current.getScreenshot())}>
+            <Button
+              variant="secondary"
+              onClick={() => setImage(webcamRef.current.getScreenshot())}
+              style={{
+                position: 'absolute',
+                bottom: '10px',
+                left: '50%',
+                transform: 'translateX(-50%)'
+              }}
+            >
               Capture Photo
             </Button>
           </Col>
