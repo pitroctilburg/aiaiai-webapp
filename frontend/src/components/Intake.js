@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Webcam from "react-webcam";
 import { v4 as uuidv4 } from 'uuid';
 import { Form, Button, Table, Container, Row, Col, Accordion } from 'react-bootstrap';
+import './Intake.css';
 
 function Intake() {
   const [name, setName] = useState("");
