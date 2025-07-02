@@ -84,7 +84,7 @@ function Intake() {
       <h1>Intake</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group as={Row} controlId="formName">
-          <Form.Label column sm="2">Name:</Form.Label>
+          <Form.Label column sm="2">Naam:</Form.Label>
           <Col sm="10">
             <Form.Control
               type="text"
@@ -94,8 +94,8 @@ function Intake() {
             />
           </Col>
         </Form.Group>
-        <Form.Group as={Row} controlId="formBirthdate">
-          <Form.Label column sm="2">Birthdate:</Form.Label>
+        <Form.Group as={Row} controlId="formBirthdate" className="mt-3">
+          <Form.Label column sm="2">Geboortedatum:</Form.Label>
           <Col sm="10">
             <Form.Control
               type="date"
@@ -137,7 +137,7 @@ function Intake() {
           type="submit"
           className="w-100 mt-3"
           style={{ display: 'block', margin: '0 auto' }}
-        >
+          className="w-100 mt-3 mb-4"
           Submit
         </Button>
       </Form>
