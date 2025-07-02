@@ -5,6 +5,7 @@ require('dotenv').config();
 const pool = require('./db');
 
 const app = express();
+
 app.use(cors({
   origin: 'http://localhost:3000',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -20,7 +21,7 @@ app.post('/deelnemers', async (req, res) => {
       "INSERT INTO deelnemers (naam, geboortedatum, registratietijd) VALUES (?, ?, NOW())",
       [naam, geboortedatum]
     );
-    res.status(201).json({ id: result.insertId });
+    res.status(201).json({ id: Number(result.insertId) });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -48,5 +49,6 @@ app.get('/deelnemers', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
