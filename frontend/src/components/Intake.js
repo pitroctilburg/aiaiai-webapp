@@ -65,6 +65,7 @@ function Intake() {
       }
     }
   };
+  return (
     <div>
       <h1>Intake</h1>
       <form onSubmit={handleSubmit}>
@@ -119,7 +120,6 @@ function Intake() {
       </table>
     </div>
   );
-}
 }
 
 export default Intake;
