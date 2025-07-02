@@ -8,19 +8,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Routes for each tab
-app.post('/intake', async (req, res) => {
-  // Logic for saving intake data
-});
-
-app.post('/station/:id', async (req, res) => {
-  // Logic for saving data per station
-});
-
-app.get('/output/:participantId', async (req, res) => {
-  // Logic for retrieving the total overview
-});
-
+// Routes voor deelnemers
 app.post('/deelnemers', async (req, res) => {
   const { naam, geboortedatum } = req.body;
   try {
