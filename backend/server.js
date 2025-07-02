@@ -39,6 +39,8 @@ app.delete('/deelnemers/:id', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+app.get('/deelnemers', async (req, res) => {
   try {
     const deelnemers = await pool.query("SELECT * FROM deelnemers");
     res.json(deelnemers);

@@ -120,5 +120,6 @@ function Intake() {
     </div>
   );
 }
+}
 
 export default Intake;
