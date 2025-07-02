@@ -19,7 +19,8 @@ function Intake() {
       if (response.ok) {
         console.log("Deelnemer succesvol toegevoegd");
       } else {
-        console.error("Fout bij het toevoegen van deelnemer");
+        const errorData = await response.json();
+        console.error("Fout bij het toevoegen van deelnemer:", errorData.error);
       }
     } catch (error) {
       console.error("Er is een fout opgetreden:", error);
