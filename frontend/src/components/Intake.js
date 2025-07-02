@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Webcam from "react-webcam";
 import { v4 as uuidv4 } from 'uuid';
+import { Form, Button, Table, Container, Row, Col } from 'react-bootstrap';
 
 function Intake() {
   const [name, setName] = useState("");
@@ -79,51 +80,53 @@ function Intake() {
     }
   };
   return (
-    <div>
+    <Container>
       <h1>Intake</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Name:
-            <input
+      <Form onSubmit={handleSubmit}>
+        <Form.Group as={Row} controlId="formName">
+          <Form.Label column sm="2">Name:</Form.Label>
+          <Col sm="10">
+            <Form.Control
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
             />
-          </label>
-        </div>
-        <div>
-          <label>
-            Birthdate:
-            <input
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row} controlId="formBirthdate">
+          <Form.Label column sm="2">Birthdate:</Form.Label>
+          <Col sm="10">
+            <Form.Control
               type="date"
               value={birthdate}
               onChange={(e) => setBirthdate(e.target.value)}
               required
             />
-          </label>
-        </div>
-        <div>
-          {image ? (
-            <img src={image} alt="Captured" style={{ width: '320px', height: '240px', objectFit: 'cover' }} />
-          ) : (
-            <Webcam
-              audio={false}
-              ref={webcamRef}
-              screenshotFormat="image/jpeg"
-              width={320}
-              height={240}
-            />
-          )}
-          <button type="button" onClick={() => setImage(webcamRef.current.getScreenshot())}>
-            Capture Photo
-          </button>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row}>
+          <Col sm="12">
+            {image ? (
+              <img src={image} alt="Captured" style={{ width: '320px', height: '240px', objectFit: 'cover' }} />
+            ) : (
+              <Webcam
+                audio={false}
+                ref={webcamRef}
+                screenshotFormat="image/jpeg"
+                width={320}
+                height={240}
+              />
+            )}
+            <Button variant="secondary" onClick={() => setImage(webcamRef.current.getScreenshot())}>
+              Capture Photo
+            </Button>
+          </Col>
+        </Form.Group>
+        <Button variant="primary" type="submit">Submit</Button>
+      </Form>
       <h2>Recent Toegevoegde Deelnemers</h2>
-      <table>
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th>ID</th>
@@ -156,8 +159,8 @@ function Intake() {
             </tr>
           ))}
         </tbody>
-      </table>
-    </div>
+      </Table>
+    </Container>
   );
 }
 
