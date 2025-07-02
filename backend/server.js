@@ -20,8 +20,7 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/');
   },
   filename: (req, file, cb) => {
-    const profielfoto = req.body.profielfoto || `${Date.now()}.jpg`;
-    cb(null, profielfoto);
+    cb(null, file.originalname);
   }
 });
 
@@ -30,7 +29,8 @@ const upload = multer({ storage });
 // Routes voor deelnemers
 app.post('/deelnemers', upload.single('photo'), async (req, res) => {
   const { naam, geboortedatum } = req.body;
-  const photoPath = req.file ? req.file.path : null;
+  console.log(req.file.originalname);
+  console.log(req.file.filename);
   try {
     const profielfoto = req.body.profielfoto || null;
     const result = await pool.query(
