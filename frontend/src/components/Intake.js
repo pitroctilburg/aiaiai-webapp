@@ -36,7 +36,7 @@ function Intake() {
       formData.append('geboortedatum', formattedDate);
       if (image) {
         const blob = await fetch(image).then(res => res.blob());
-        const photoFilename = `profile-${uuidv4()}.jpg`;
+        const photoFilename = `${uuidv4()}.jpg`;
         formData.append('photo', blob, photoFilename);
         formData.append('profielfoto', photoFilename);
       }
