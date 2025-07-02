@@ -132,7 +132,14 @@ function Intake() {
             </Button>
           </Col>
         </Form.Group>
-        <Button variant="primary" type="submit">Submit</Button>
+        <Button
+          variant="primary"
+          type="submit"
+          className="w-100 mt-3"
+          style={{ display: 'block', margin: '0 auto' }}
+        >
+          Submit
+        </Button>
       </Form>
       <h2>Recent Toegevoegde Deelnemers</h2>
       <Table striped bordered hover>
