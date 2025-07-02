@@ -8,7 +8,7 @@ function Intake() {
     e.preventDefault();
     try {
       const formattedDate = new Date(birthdate).toISOString().split('T')[0];
-      const response = await fetch('http://localhost:7000/deelnemers', {
+      const response = await fetch('http://localhost:3001/deelnemers', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
