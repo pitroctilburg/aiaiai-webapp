@@ -6,18 +6,19 @@ function Intake() {
 
   const [participants, setParticipants] = useState([]);
 
-  useEffect(() => {
-    const fetchParticipants = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/deelnemers');
-        if (response.ok) {
-          const data = await response.json();
-          setParticipants(data.slice(-10).reverse());
-        }
-      } catch (error) {
-        console.error("Er is een fout opgetreden bij het ophalen van deelnemers:", error);
+  const fetchParticipants = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/deelnemers');
+      if (response.ok) {
+        const data = await response.json();
+        setParticipants(data.slice(-10).reverse());
       }
-    };
+    } catch (error) {
+      console.error("Er is een fout opgetreden bij het ophalen van deelnemers:", error);
+    }
+  };
+
+  useEffect(() => {
 
     fetchParticipants();
   }, []);
